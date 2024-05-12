@@ -65,11 +65,11 @@ namespace fans
         {
             if (!current.Transitions.ContainsKey(c))
             {
-                return null; // вернуть null в случае отсутствия перехода
+                return false; 
             }
             current = current.Transitions[c];
         }
-        return current.IsAcceptState;
+        return false;
     }
 }
 
@@ -115,11 +115,11 @@ public class FA2
         {
             if (!current.Transitions.ContainsKey(c))
             {
-                return null; // вернуть null в случае отсутствия перехода
+                return false; 
             }
             current = current.Transitions[c];
         }
-        return current.IsAcceptState;
+        return false;
     }
 }
 
@@ -174,11 +174,11 @@ public class FA3
         {
             if (!current.Transitions.ContainsKey(c))
             {
-                return null; // вернуть null в случае отсутствия перехода
+                return false;
             }
             current = current.Transitions[c];
         }
-        return current.IsAcceptState;
+        return false;
     }
 }
 
