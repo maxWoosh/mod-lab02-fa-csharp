@@ -3,13 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using System;
-using System.Collections.Generic;
-
 namespace fans
 {
-
     public class State
     {
         public string Name;
@@ -17,179 +12,181 @@ namespace fans
         public bool IsAcceptState;
     }
 
+
+    
     public class FA1
-{
-    public static State q0 = new State()
     {
-        Name = "q0",
-        IsAcceptState = false,
-        Transitions = new Dictionary<char, State>()
-    };
-
-    public State q1 = new State()
-    {
-        Name = "q1",
-        IsAcceptState = false,
-        Transitions = new Dictionary<char, State>()
-    };
-
-    public State q3 = new State()
-    {
-        Name = "q3",
-        IsAcceptState = false,
-        Transitions = new Dictionary<char, State>()
-    };
-
-    public State q4 = new State()
-    {
-        Name = "q4",
-        IsAcceptState = true,
-        Transitions = new Dictionary<char, State>()
-    };
-
-    public State q5 = new State()
-    {
-        Name = "q5",
-        IsAcceptState = false,
-        Transitions = new Dictionary<char, State>()
-    };
-
-    State InitialState = q0;
-
-    public FA1()
-    {
-        q0.Transitions['1'] = q3;
-        q0.Transitions['0'] = q1;
-        q1.Transitions['1'] = q4;
-        q1.Transitions['0'] = q5;
-        q3.Transitions['1'] = q3;
-        q3.Transitions['0'] = q4;
-        q4.Transitions['1'] = q4;
-        q4.Transitions['0'] = q5;
-        q5.Transitions['1'] = q5;
-        q5.Transitions['1'] = q5;
-    }
-
-    public bool? Run(IEnumerable<char> s)
-    {
-        State current = InitialState;
-        foreach (var c in s)
+        public static State q0 = new State()
         {
-            current = current.Transitions[c];
-            if (current == null)
-                return null;
-        }
-        return current.IsAcceptState;
-    }
-}
-
-public class FA2
-{
-    public static State q0 = new State()
-    {
-        Name = "q0",
-        IsAcceptState = false,
-        Transitions = new Dictionary<char, State>()
-    };
-
-    public State q1 = new State()
-    {
-        Name = "q1",
-        IsAcceptState = false,
-        Transitions = new Dictionary<char, State>()
-    };
-
-    public State q3 = new State()
-    {
-        Name = "q3",
-        IsAcceptState = true,
-        Transitions = new Dictionary<char, State>()
-    };
-
-    public State q4 = new State()
-    {
-        Name = "q0",
-        IsAcceptState = false,
-        Transitions = new Dictionary<char, State>()
-    };
-
-    State InitialState = q0;
-
-    public FA2()
-    {
-        q0.Transitions['1'] = q4;
-        q0.Transitions['0'] = q1;
-        q1.Transitions['1'] = q3;
-        q1.Transitions['0'] = q0;
-        q3.Transitions['1'] = q1;
-        q3.Transitions['0'] = q4;
-        q4.Transitions['1'] = q4;
-        q4.Transitions['0'] = q3;
-    }
-
-    public bool? Run(IEnumerable<char> s)
-    {
-        State current = InitialState;
-        foreach (var q3 in s)
+            Name = "q0",
+            IsAcceptState = false,
+            Transitions = new Dictionary<char, State>()
+        };
+        public State q1 = new State()
         {
-            current = current.Transitions[q3];
-            if (current == null)
-                return null;
-        }
-        return current.IsAcceptState;
-    }
-}
-
-public class FA3
-{
-    public static State q0 = new State()
-    {
-        Name = "q0",
-        IsAcceptState = false,
-        Transitions = new Dictionary<char, State>()
-    };
-
-    public State q1 = new State()
-    {
-        Name = "q1",
-        IsAcceptState = false,
-        Transitions = new Dictionary<char, State>()
-    };
-
-    public State q3 = new State()
-    {
-        Name = "q3",
-        IsAcceptState = true,
-        Transitions = new Dictionary<char, State>()
-    };
-
-
-    State InitialState = q0;
-
-    public FA3()
-    {
-        q0.Transitions['1'] = q1;
-        q0.Transitions['0'] = q0;
-        q1.Transitions['1'] = q3;
-        q1.Transitions['0'] = q0;
-        q3.Transitions['1'] = q3;
-        q3.Transitions['0'] = q3;
-
-    }
-
-    public bool? Run(IEnumerable<char> s)
-    {
-        State current = InitialState;
-        foreach (var c in s)
+            Name = "q1",
+            IsAcceptState = false,
+            Transitions = new Dictionary<char, State>()
+        };
+        public State q2 = new State()
         {
-            current = current.Transitions[c];
-            if (current == null)
-                return null;
-        }
-        return current.IsAcceptState;
-    }
-}
+            Name = "q2",
+            IsAcceptState = false,
+            Transitions = new Dictionary<char, State>()
+        };
+        public State q3 = new State()
+        {
+            Name = "q3",
+            IsAcceptState = true,
+            Transitions = new Dictionary<char, State>()
+        };
+        public State q4 = new State()
+        {
+            Name = "q4",
+            IsAcceptState = false,
+            Transitions = new Dictionary<char, State>()
+        };
+        State InitialState = q0;
 
+        public FA1()
+        {
+            q0.Transitions['1'] = q2;
+            q0.Transitions['0'] = q1;
+
+            q1.Transitions['1'] = q3;
+            q1.Transitions['0'] = q4;
+
+            q2.Transitions['1'] = q2;
+            q2.Transitions['0'] = q3;
+
+            q3.Transitions['1'] = q3;
+            q3.Transitions['0'] = q4;
+
+            q4.Transitions['1'] = q4;
+            q4.Transitions['0'] = q4;
+        }
+        public bool? Run(IEnumerable<char> s)
+        {
+            State current = InitialState;
+            foreach (var c in s)
+            {
+                current = current.Transitions[c];
+                if (current == null)
+                    return null;
+            }
+            return current.IsAcceptState;
+        }
+    }
+
+    
+    public class FA2
+    {
+        public static State q0 = new State()
+        {
+            Name = "q0",
+            IsAcceptState = false,
+            Transitions = new Dictionary<char, State>()
+        };
+        public State q1 = new State()
+        {
+            Name = "q1",
+            IsAcceptState = false,
+            Transitions = new Dictionary<char, State>()
+        };
+        public State q2 = new State()
+        {
+            Name = "q2",
+            IsAcceptState = true,
+            Transitions = new Dictionary<char, State>()
+        };
+        public static State q3 = new State()
+        {
+            Name = "q0",
+            IsAcceptState = false,
+            Transitions = new Dictionary<char, State>()
+        };
+
+        State InitialState = q0;
+
+        public FA2()
+        {
+            q0.Transitions['1'] = q3;
+            q0.Transitions['0'] = q1;
+
+            q1.Transitions['1'] = q2;
+            q1.Transitions['0'] = q0;
+
+            q2.Transitions['1'] = q1;
+            q2.Transitions['0'] = q3;
+
+            q3.Transitions['1'] = q3;
+            q3.Transitions['0'] = q2;
+        }
+
+        public bool? Run(IEnumerable<char> s)
+        {
+            State current = InitialState;
+            foreach (var c in s)
+            {
+                current = current.Transitions[c];
+                if (current == null)
+                    return null;
+            }
+            return current.IsAcceptState;
+        }
+    }
+
+
+    
+    public class FA3
+    {
+        public static State q0 = new State()
+        {
+            Name = "q0",
+            IsAcceptState = false,
+            Transitions = new Dictionary<char, State>()
+        };
+        public State q1 = new State()
+        {
+            Name = "q1",
+            IsAcceptState = false,
+            Transitions = new Dictionary<char, State>()
+        };
+        public State q2 = new State()
+        {
+            Name = "q2",
+            IsAcceptState = true,
+            Transitions = new Dictionary<char, State>()
+        };
+
+        State InitialState = q0;
+
+        public FA3()
+        {
+            q0.Transitions['1'] = q1;
+            q0.Transitions['0'] = q0;
+
+            q1.Transitions['1'] = q2;
+            q1.Transitions['0'] = q0;
+
+            q2.Transitions['1'] = q2;
+            q2.Transitions['0'] = q2;
+        }
+
+        public bool? Run(IEnumerable<char> s)
+        {
+            State current = InitialState;
+            foreach (var c in s)
+            {
+                current = current.Transitions[c];
+                if (current == null)
+                    return null;
+            }
+            return current.IsAcceptState;
+        }
+    }
+
+  
     class Program
     {
         static void Main(string[] args)
